@@ -4,6 +4,7 @@ import { getEntry } from "@/lib/content"
 import { ScrollReveal } from "@/components/ScrollReveal"
 import { MusicPlayer } from "@/components/MusicPlayer"
 import { MdxRender } from "@/components/MdxRender"
+import { serialize } from "next-mdx-remote/serialize"
 import LoreNav from "@/components/LoreNav"
 
 export default async function LorePage({ params }: { params: Promise<{ category: string; slug: string }> | { category: string; slug: string } }) {
@@ -12,6 +13,14 @@ export default async function LorePage({ params }: { params: Promise<{ category:
   if (!entry) return notFound()
 
   const { frontmatter, content } = entry
+
+  // We pass the raw content string into `MdxRender` which will render it
+  // using a reliable markdown renderer as a fallback (or MDXRemote when
+  // serialized objects are used). This avoids situations where MDXRemote
+  // doesn't render correctly in the environment.
+  // If you prefer full MDX component rendering, we can switch back to
+  // `serialize(content)` + `MDXRemote` after confirming configuration.
+  // const mdxSource = await serialize(content)
 
   // MDX renders as a component automatically with Next MDX config.
   // We can import it dynamically by using the filesystem route,
