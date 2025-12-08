@@ -16,14 +16,17 @@ export function FadeLayout({ children }: { children: ReactNode }) {
   }, [])
 
   return (
-    <AnimatePresence mode="wait">
+    <AnimatePresence mode="sync">
       <motion.div
         key={pathname}
         // Avoid animating on the very first mount/hydration to prevent
         // a double fade caused by server -> client hydration + route enter.
         initial={hasHydrated ? { opacity: 0 } : false}
         animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
+        // Remove the exit animation so the outgoing page does not fade to
+        // transparent (which reveals the black body background). Keeping no
+        // exit prevents the dark gap and lets the incoming page fade in over
+        // the existing content.
         transition={{ duration: 0.45, ease: "easeInOut" }}
         className="min-h-screen"
       >
