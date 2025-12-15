@@ -8,8 +8,6 @@ import { serialize } from "next-mdx-remote/serialize"
 import LoreNav from "@/components/LoreNav"
 import Badge from "@/components/Badge"
 
-// TODO: Replace with Badge component when available
-
 
 export default async function LorePage({ params }: { params: Promise<{ category: string; slug: string }> | { category: string; slug: string } }) {
   const resolved = await params
@@ -76,24 +74,24 @@ export default async function LorePage({ params }: { params: Promise<{ category:
       <LoreNav category={resolved.category} slug={resolved.slug} />
 
       {/* Lore body */}
+      {/* Tags */}
+      {/* TODO Implement Tag page feature */}
       <section className="mx-auto max-w-3xl px-6 py-14">
         <ScrollReveal>
-          <div className="text-sm text-white/60 flex gap-3">
-            {frontmatter.tags ? frontmatter.tags.map((t) => <Badge key={t} text={t} />)
-            .join(" ") : "No tags"}
-          </div>
-          <div className="mt-4 border-t border-white/10">
-            {frontmatter.tags && frontmatter.tags.length > 0 ? (
-              <div className="mt-2 text-xs text-white/50">
-                Tags: {frontmatter.tags.join(", ")}
-              </div>
-            ) : null}
-          </div>
+          {frontmatter.tags && frontmatter.tags.length > 0 ? (
+            <div className="flex flex-wrap gap-3 text-sm text-white/60">
+              {frontmatter.tags.map((tag) => (
+                <Badge key={tag} text={tag} />
+              ))}
+            </div>
+          ) : (
+            <p className="text-sm text-white/50">No tags yet</p>
+          )}
         </ScrollReveal>
         
         <ScrollReveal>
           {frontmatter.excerpt ? (
-            <p className="text-lg text-white/70 italic">{frontmatter.excerpt}</p>
+            <p className="text-lg text-white/70 italic pt-10">{frontmatter.excerpt}</p>
           ) : null}
         </ScrollReveal>
 

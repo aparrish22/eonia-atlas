@@ -2,6 +2,12 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
+AP - To check for type errors and anything that needs to be reviewed:
+
+```bash
+npm run build
+```
+
 First, run the development server:
 
 ```bash

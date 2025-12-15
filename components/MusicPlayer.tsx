@@ -1,5 +1,7 @@
 "use client"
 
+// TODO add a feature that upon hovering the button, it shows a small popup with info about the music track (name, artist, source, etc)
+
 import { useEffect, useMemo, useRef, useState } from "react"
 
 type Props = {
