@@ -1,13 +1,13 @@
-import Image from "next/image"
 import { notFound } from "next/navigation"
 import { getEntry } from "@/lib/content"
-import { ScrollReveal } from "@/components/ScrollReveal"
-import { MusicPlayer } from "@/components/MusicPlayer"
 import { MdxRender } from "@/components/MdxRender"
-import { serialize } from "next-mdx-remote/serialize"
 import LoreNav from "@/components/LoreNav"
 import Badge from "@/components/Badge"
+import { ScrollReveal } from "@/components/ScrollReveal"
+import { LoreHero } from "@/components/LoreHero"
+import { getCoverPosition, normalizeKey } from "@/lib/coverPositions"
 
+export const dynamic = "force-dynamic"
 
 export default async function LorePage({ params }: { params: Promise<{ category: string; slug: string }> | { category: string; slug: string } }) {
   const resolved = await params
@@ -15,6 +15,7 @@ export default async function LorePage({ params }: { params: Promise<{ category:
   if (!entry) return notFound()
 
   const { frontmatter, content } = entry
+  const coverPosition = getCoverPosition(normalizeKey(resolved.category, resolved.slug))
 
   // We pass the raw content string into `MdxRender` which will render it
   // using a reliable markdown renderer as a fallback (or MDXRemote when
@@ -37,38 +38,16 @@ export default async function LorePage({ params }: { params: Promise<{ category:
 
   return (
     <main className="min-h-screen">
-      {/* Cinematic cover */}
-      <section className="relative h-[55vh] min-h-[360px] w-full overflow-hidden">
-        {frontmatter.cover ? (
-          <Image
-            src={frontmatter.cover}
-            alt={frontmatter.title}
-            fill
-            priority
-            className="object-cover opacity-70"
-          />
-        ) : (
-          <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-white/10 via-black to-black" />
-        )}
-
-        <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-black/30 via-black/40 to-black" />
-
-        <div className="relative mx-auto flex h-full max-w-5xl flex-col justify-end px-6 pb-10">
-          <ScrollReveal>
-            <div className="flex items-center justify-between gap-4">
-              <div>
-                <p className="text-xs uppercase tracking-[0.25em] text-white/60">
-                  {frontmatter.region ?? frontmatter.type ?? resolved.category}
-                </p>
-                <h1 className="mt-2 text-3xl md:text-5xl font-semibold">
-                  {frontmatter.title}
-                </h1>
-              </div>
-              <MusicPlayer src={frontmatter.music} />
-            </div>
-          </ScrollReveal>
-        </div>
-      </section>
+      <LoreHero
+        title={frontmatter.title}
+        region={frontmatter.region}
+        type={frontmatter.type}
+        category={resolved.category}
+        slug={resolved.slug}
+        cover={frontmatter.cover}
+        music={frontmatter.music}
+        initialPosition={coverPosition}
+      />
 
       {/* Navigation */}
       <LoreNav category={resolved.category} slug={resolved.slug} />
