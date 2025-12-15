@@ -12,12 +12,23 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
   return (
     <main className="mx-auto max-w-4xl px-6 py-16">
       <ScrollReveal>
-        <p className="text-xs uppercase tracking-[0.25em] text-white/60">
-          Category
-        </p>
-        <h1 className="mt-2 text-3xl font-semibold">
-          {resolved.category.charAt(0).toUpperCase() + resolved.category.slice(1)}
-        </h1>
+        <div className="flex items-center justify-between gap-4">
+          <div>
+            <p className="text-xs uppercase tracking-[0.25em] text-white/60">
+              Category
+            </p>
+            <h1 className="mt-2 text-3xl font-semibold">
+              {resolved.category.charAt(0).toUpperCase() + resolved.category.slice(1)}
+            </h1>
+          </div>
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm text-white/80 shadow-sm hover:bg-white/10 transition"
+          >
+            <span className="text-white/60">←</span>
+            Back to Home
+          </Link>
+        </div>
       </ScrollReveal>
 
       <div className="mt-8 grid gap-4">

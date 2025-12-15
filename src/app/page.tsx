@@ -1,16 +1,29 @@
+import Image from "next/image"
 import Link from "next/link"
 import { getAllCategories, getEntriesByCategory } from "@/lib/content"
 import { ScrollReveal } from "@/components/ScrollReveal"
 
 export default function HomePage() {
   const categories = getAllCategories()
+  const heroImage = "/images/roanthur.jpg"
 
   return (
     <main className="min-h-screen">
       {/* Hero */}
       <section className="relative overflow-hidden">
-        <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-white/5 via-transparent to-black" />
-        <div className="mx-auto max-w-5xl px-6 py-24">
+        <div className="absolute inset-0">
+          <Image
+            src={heroImage}
+            alt="Eonia vista"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover opacity-60"
+          />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black" />
+        </div>
+
+        <div className="relative mx-auto max-w-5xl px-6 py-24">
           <ScrollReveal>
             <p className="text-xs uppercase tracking-[0.25em] text-white/60">
               The World of Eonia
