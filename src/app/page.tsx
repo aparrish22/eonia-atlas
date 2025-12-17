@@ -40,6 +40,12 @@ export default function HomePage() {
 
           <ScrollReveal>
             <div className="mt-10 flex flex-wrap gap-3">
+              <Link
+                href="/world-map"
+                className="rounded-2xl border border-white/15 bg-white/10 px-4 py-2 text-sm text-white hover:bg-white/15 transition"
+              >
+                World Map →
+              </Link>
               {categories.map((c) => (
                 <Link
                   key={c}

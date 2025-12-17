@@ -22,6 +22,12 @@ export type ContentEntry = {
   content: string
 }
 
+export type EntrySummary = {
+  category: string
+  slug: string
+  title: string
+}
+
 function readMdxFile(filePath: string) {
   const raw = fs.readFileSync(filePath, "utf8")
   const { data, content } = matter(raw)
@@ -65,6 +71,14 @@ export function getAllEntries(): ContentEntry[] {
 
 export function getEntriesByCategory(category: string): ContentEntry[] {
   return getAllEntries().filter((e) => e.category === category)
+}
+
+export function getAllEntrySummaries(): EntrySummary[] {
+  return getAllEntries().map((e) => ({
+    category: e.category,
+    slug: e.slug,
+    title: e.frontmatter.title,
+  }))
 }
 
 export function getEntry(category: string, slug: string): ContentEntry | null {
