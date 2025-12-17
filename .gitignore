@@ -44,4 +44,4 @@ next-env.d.ts
 .vscode
 
 # dist
-.dist
+.distdata/cover-positions.json
