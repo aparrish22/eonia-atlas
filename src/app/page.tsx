@@ -38,14 +38,9 @@ export default function HomePage() {
             </p>
           </ScrollReveal>
 
+        {/* Content buttons */}
           <ScrollReveal>
             <div className="mt-10 flex flex-wrap gap-3">
-              <Link
-                href="/world-map"
-                className="rounded-2xl border border-white/15 bg-white/10 px-4 py-2 text-sm text-white hover:bg-white/15 transition"
-              >
-                World Map →
-              </Link>
               {categories.map((c) => (
                 <Link
                   key={c}
@@ -55,6 +50,18 @@ export default function HomePage() {
                   {c.charAt(0).toUpperCase() + c.slice(1)}
                 </Link>
               ))}
+            </div>
+          </ScrollReveal>
+
+          {/* Additional Content Buttons */}
+          <ScrollReveal>
+            <div className="mt-7 flex flex-wrap gap-3">
+              <Link
+                href="/world-map"
+                className="rounded-2xl border border-white/10 bg-white/5 px-4 py-2 text-sm text-white/80 hover:text-white hover:bg-white/10 transition"
+              >
+                World Map
+              </Link>
             </div>
           </ScrollReveal>
         </div>
