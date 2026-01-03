@@ -79,7 +79,7 @@ type WorldMapProps = {
 type SaveState = "idle" | "saving" | "saved" | "error"
 
 const DRAG_THRESHOLD_PX = 4
-const MIN_ZOOM = 0.75
+const MIN_ZOOM = 0.25
 const MAX_ZOOM = 4.0
 const DEFAULT_ZOOM = 1.2
 

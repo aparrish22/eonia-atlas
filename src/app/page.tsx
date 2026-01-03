@@ -34,7 +34,7 @@ export default function HomePage() {
             </h1>
             <p className="mt-5 max-w-2xl text-white/70">
               Explore locations, events, characters, and fragments of lore.
-              This is the living archive of your world — one page at a time.
+              This is the living archive of Glaudire, a continent of Eonia — one page at a time.
             </p>
           </ScrollReveal>
 

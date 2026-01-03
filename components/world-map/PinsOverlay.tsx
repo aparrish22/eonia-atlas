@@ -80,6 +80,9 @@ export function PinsOverlay({
             >
               <span className="pointer-events-none absolute left-1/2 top-0 z-10 -translate-x-1/2 -translate-y-[140%] whitespace-nowrap rounded-full border border-white/10 bg-black/60 px-3 py-1 text-[11px] text-white/85 opacity-0 shadow-sm backdrop-blur transition-opacity group-hover:opacity-100">
                 {pin.title}
+                <span className="duration-75 hover:opacity-100 transition-opacity ml-1 inline-block align-middle">
+                  {pin.subtitle ? ` • ${pin.subtitle}` : null}
+                </span>
               </span>
             </button>
           </div>

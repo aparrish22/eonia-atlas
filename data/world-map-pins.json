@@ -2,8 +2,8 @@
   "pins": [
     {
       "id": "d13d6bd2-5ccc-4475-8d5a-132765ee2fbf",
-      "x": 0.5973475664511494,
-      "y": 0.4186023307790549,
+      "x": 0.6300608944444271,
+      "y": 0.45732094938628975,
       "title": "Dislow Garrison",
       "subtitle": "Subtitle for DG!",
       "description": "Dislow Garrison, the fortress of Dislow Heights overseeing passage to and from the Eastern Realms and Lucelus Desert.",
@@ -11,15 +11,9 @@
       "mdxSlug": "dislow-garrison"
     },
     {
-      "id": "5a2fbf58-0c01-4cab-99df-76738bc71c7a",
-      "x": 0.2801275143678161,
-      "y": 0.42973738825031926,
-      "title": "New pin"
-    },
-    {
       "id": "d2aa4e5d-3180-4ad6-999e-8dfea4a02fe7",
-      "x": 0.8592010147270115,
-      "y": 0.7733277458492975,
+      "x": 0.6558078859286615,
+      "y": 0.8359878271179167,
       "title": "Azuria Academy",
       "subtitle": "Azuria Pin Subtitle!",
       "description": "Azuria Academy, the renown institutional for the arcane arts of the Eastern Realms.",
