@@ -62,8 +62,16 @@ export default function HomePage() {
               >
                 World Map
               </Link>
+              <Link
+                href="/maps"
+                className="rounded-2xl border border-white/10 bg-white/5 px-4 py-2 text-sm text-white/80 hover:text-white hover:bg-white/10 transition"
+              >
+                Maps
+              </Link>
             </div>
+            
           </ScrollReveal>
+          
         </div>
       </section>
 

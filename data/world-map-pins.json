@@ -1,6 +1,14 @@
 {
   "pins": [
     {
+      "id": "fce2cb47-f05a-4357-b890-60ffc885e435",
+      "x": 0.6047376943846015,
+      "y": 0.4770474951264711,
+      "title": "Southern Dislow Towers",
+      "subtitle": "The southern stronghold of Dislow Garrison.",
+      "mdxCategory": "locations"
+    },
+    {
       "id": "d13d6bd2-5ccc-4475-8d5a-132765ee2fbf",
       "x": 0.6300608944444271,
       "y": 0.45732094938628975,

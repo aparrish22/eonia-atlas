@@ -62,14 +62,16 @@ import { useEffect, useMemo, useRef, useState, type PointerEvent, type WheelEven
 import { useRouter } from "next/navigation"
 import type { EntrySummary } from "@/lib/content"
 import type { WorldMapPin } from "@/lib/worldMapPins"
-import { MapViewport } from "@/components/world-map/MapViewport"
-import { PinsOverlay } from "@/components/world-map/PinsOverlay"
-import { PinEditorPanel } from "@/components/world-map/PinEditorPanel"
-import { DeletePinModal } from "@/components/world-map/DeletePinModal"
-import { NavigateModal } from "@/components/world-map/NavigateModal"
+import type { MapInfo } from "@/lib/maps"
+import { MapViewport } from "@/components/map-viewer/MapViewport"
+import { PinsOverlay } from "@/components/map-viewer/PinsOverlay"
+import { PinEditorPanel } from "@/components/map-viewer/PinEditorPanel"
+import { DeletePinModal } from "@/components/map-viewer/DeletePinModal"
+import { NavigateModal } from "@/components/map-viewer/NavigateModal"
 
 type WorldMapProps = {
-  mapSrc: string
+  maps: readonly [MapInfo, ...MapInfo[]]
+  defaultMapId?: MapInfo["id"]
   mapWidth?: number
   mapHeight?: number
   initialPins: WorldMapPin[]
@@ -83,12 +85,14 @@ const MIN_ZOOM = 0.25
 const MAX_ZOOM = 4.0
 const DEFAULT_ZOOM = 1.2
 
-const MAP_LAYERS = [
-  { id: "current", label: "Current", src: "/maps/world-map-current.png" },
-  { id: "state", label: "State", src: "/maps/world-map-state.png" },
-  { id: "height", label: "Height", src: "/maps/world-map-height.png" },
-  { id: "biome", label: "Biome", src: "/maps/world-map-biome.png" },
-] as const
+// TODO: use new maps.ts config file
+// line 642 uses property label and id
+// const MAP_LAYERS = [
+//   { id: "current", label: "Current", src: "/maps/world-map-current.png" },
+//   { id: "state", label: "State", src: "/maps/world-map-state.png" },
+//   { id: "height", label: "Height", src: "/maps/world-map-height.png" },
+//   { id: "biome", label: "Biome", src: "/maps/world-map-biome.png" },
+// ] as const
 
 function clamp01(value: number) {
   if (Number.isNaN(value)) return 0.5
@@ -105,12 +109,19 @@ function newId() {
 }
 
 export function WorldMap({
-  mapSrc,
+  maps,
+  defaultMapId,
   mapWidth = 1600,
   mapHeight = 900,
   initialPins,
   entrySummaries,
 }: WorldMapProps) {
+  const [activeMapId, setActiveMapId] = useState<MapInfo["id"]>(
+    defaultMapId ?? maps[0].id
+  )
+
+  const activeMap = maps.find((m) => m.id === activeMapId) ?? maps[0]
+
   const router = useRouter()
   const containerRef = useRef<HTMLDivElement | null>(null)
   const viewportRef = useRef<{ width: number; height: number }>({ width: 0, height: 0 })
@@ -150,7 +161,7 @@ export function WorldMap({
   const [message, setMessage] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
 
-  const [activeMapIndex, setActiveMapIndex] = useState(0)
+  // const [activeMapIndex, setActiveMapIndex] = useState(0)
   const [imgSize, setImgSize] = useState({ w: mapWidth, h: mapHeight })
 
   const [camera, setCamera] = useState(() => ({ scale: DEFAULT_ZOOM, tx: 0, ty: 0 }))
@@ -164,7 +175,11 @@ export function WorldMap({
   }
 
   // Map layers configuration
-  const activeMap = MAP_LAYERS[activeMapIndex] ?? MAP_LAYERS[0]
+  // DONE, clean MAP_LAYERS to fit maps.ts config style
+  // const activeMap = MAP_LAYERS[activeMapIndex] ?? MAP_LAYERS[0]
+
+
+
 
   const selectedPin = useMemo(() => pins.find((p) => p.id === selectedId) ?? null, [pins, selectedId])
   const selectedMdxCategory = selectedPin?.mdxCategory
@@ -639,16 +654,16 @@ export function WorldMap({
 
             <div className="inline-flex overflow-hidden rounded-full border border-white/15 bg-white/5">
               { /* Map layer buttons */ }
-              {MAP_LAYERS.map((m, i) => (
+              {maps.map((m) => (
                 <button
                   key={m.id}
                   type="button"
                   className={[
                     "px-3 py-2 text-sm transition",
-                    i === activeMapIndex ? "bg-white/15 text-white" : "text-white/75 hover:bg-white/10",
+                    m.id === activeMapId ? "bg-white/15 text-white" : "text-white/75 hover:bg-white/10",
                   ].join(" ")}
-                  onClick={() => setActiveMapIndex(i)}
-                  aria-pressed={i === activeMapIndex}
+                  onClick={() => setActiveMapId(m.id)}
+                  aria-pressed={m.id === activeMapId}
                 >
                   {m.label}
                 </button>
