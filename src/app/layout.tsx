@@ -1,6 +1,7 @@
 import "./globals.css"
 import type { Metadata } from "next"
 import { FadeLayout } from "@/components/FadeLayout"
+import Navbar from "@/components/Navbar"
 
 export const metadata: Metadata = {
   title: "Eonia Atlas",
@@ -15,7 +16,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="bg-black text-white">
-        <FadeLayout>{children}</FadeLayout>
+        <Navbar />
+        <FadeLayout>
+          <main>{children}</main>
+        </FadeLayout>
       </body>
     </html>
   )

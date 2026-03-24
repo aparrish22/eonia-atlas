@@ -1,11 +1,11 @@
-import Image from "next/image"
-import Link from "next/link"
-import { getAllCategories, getEntriesByCategory } from "@/lib/content"
-import { ScrollReveal } from "@/components/ScrollReveal"
+import Image from "next/image";
+import Link from "next/link";
+import { getAllCategories, getEntriesByCategory } from "@/lib/content";
+import { ScrollReveal } from "@/components/ScrollReveal";
 
 export default function HomePage() {
-  const categories = getAllCategories()
-  const heroImage = "/images/roanthur.jpg"
+  const categories = getAllCategories();
+  const heroImage = "/images/roanthur.jpg";
 
   return (
     <main className="min-h-screen">
@@ -33,12 +33,13 @@ export default function HomePage() {
               <span className="text-white/70"> built to grow.</span>
             </h1>
             <p className="mt-5 max-w-2xl text-white/70">
-              Explore locations, events, characters, and fragments of lore.
-              This is the living archive of Glaudire, a continent of Eonia — one page at a time.
+              Explore locations, events, characters, and fragments of lore. This
+              is the living archive of Glaudire, a continent of Eonia — one page
+              at a time.
             </p>
           </ScrollReveal>
 
-        {/* Content buttons */}
+          {/* Content buttons */}
           <ScrollReveal>
             <div className="mt-10 flex flex-wrap gap-3">
               {categories.map((c) => (
@@ -54,7 +55,7 @@ export default function HomePage() {
           </ScrollReveal>
 
           {/* Additional Content Buttons */}
-          <ScrollReveal>
+          {/* <ScrollReveal>
             <div className="mt-7 flex flex-wrap gap-3">
               <Link
                 href="/world-map"
@@ -69,17 +70,15 @@ export default function HomePage() {
                 Maps
               </Link>
             </div>
-            
-          </ScrollReveal>
-          
+          </ScrollReveal> */}
         </div>
       </section>
 
       {/* Featured preview */}
       <section className="mx-auto max-w-5xl px-6 pb-24">
         {categories.map((category) => {
-          const entries = getEntriesByCategory(category).slice(0, 3)
-          if (!entries.length) return null
+          const entries = getEntriesByCategory(category).slice(0, 3);
+          if (!entries.length) return null;
 
           return (
             <div key={category} className="mt-14">
@@ -118,9 +117,9 @@ export default function HomePage() {
                 ))}
               </div>
             </div>
-          )
+          );
         })}
       </section>
     </main>
-  )
+  );
 }
