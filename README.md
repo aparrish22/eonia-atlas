@@ -39,4 +39,44 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**This project is currently deployed on Vercel at [eonia-atlas.vercel.app](https://eonia-atlas.vercel.app).**
+
+For deployment guidance, check out the [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Steps when a tester reports a bug
+
+1. Create a bugfix branch (git)
+
+```bash
+git switch main
+git pull
+git switch -c fix/map-pin-click
+```
+
+2. Make the fix locally
+   • edit code
+   • test with npm run dev
+
+3. Commit + push (git)
+
+```bash
+git add .
+git commit -m "fix: pin selection when panning"
+git push -u origin fix/map-pin-click
+```
+
+4. Get the Preview URL (Vercel)
+
+In Vercel dashboard:
+• Project → Deployments
+• Find the deployment for your fix/map-pin-click branch
+• Copy the Preview URL
+• Send that to your tester
+
+(You usually don’t need to click anything else.)
+
+5. Merge to Production when confirmed
+
+Once the tester says “looks good”:
+• Merge that branch into main (GitHub PR is the cleanest way)
+• Vercel will automatically redeploy Production from main
