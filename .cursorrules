@@ -1,0 +1,56 @@
+# Eonia Atlas — Cursor AI rules
+
+## Product context
+
+Eonia Atlas is a living encyclopedia of the world of Eonia, starting with Glaudire. It is lore-first: locations, characters, factions, events, and lore/systems pages for D&D players (table-facing, spoiler-aware), fantasy readers seeking depth, and you as author/editor.
+
+Prioritize a cinematic reading experience: cover hero + MDX body, clear navigation (categories, breadcrumbs; search later), and motion that supports reading (Framer Motion: fades, scroll reveals) without hurting performance or accessibility.
+
+## Tech stack (non-negotiables)
+
+- **Next.js** with the **App Router** only (`src/app/`). Prefer Server Components by default; use Client Components (`"use client"`) only when needed (motion, interactivity, browser APIs).
+- **TypeScript** everywhere for app code, components, and `lib/`. Avoid untyped escape hatches unless necessary; prefer explicit types for public APIs and content helpers.
+- **Tailwind CSS** for styling. Reuse existing patterns and layout primitives; avoid ad-hoc inline styles except for one-off dynamic values.
+- **Framer Motion** for transitions and scroll-driven effects. Respect `prefers-reduced-motion` where practical.
+- **MDX + frontmatter** for encyclopedia entries under `content/` (organized by type: locations, characters, factions, lore, etc.). Parsing/rendering should stay consistent with existing `lib/content.ts` and MDX components.
+- **Vercel**: assume production + preview deployments; keep changes compatible with static/edge-friendly patterns unless a route explicitly needs dynamic behavior.
+- Suggest at most two optional techs and only when they reduce complexity.
+
+## Architecture & data
+
+- **Phase 1 (current):** file-based MDX/JSON, Git as source of truth. No database required for core encyclopedia content. Eventually, we may want to implement a database.
+- Treat **mutable admin data** (map pins, cover positions, etc.) as a known special case: file/API patterns already in the repo may evolve toward hosted storage later; do not assume durable filesystem writes on Vercel for production mutations.
+- When suggesting persistence, align with the staged plan: MDX + local/controlled JSON first; later Supabase or Vercel-hosted data for pins/preferences; accounts/community only if explicitly in scope.
+- Assume Vercel serverless filesystem is not durable; do not write to repo files in production.
+
+## Features to align with (implement or extend consistently)
+
+- **Spoiler system (planned/high value):** support a future MDX API such as `<Spoiler level="player-safe | campaign | book">` with blur/block, label + short warning, and click-to-reveal. Keep levels consistent with Player-Safe (default), Campaign Spoilers, and Book Spoilers.
+- **Maps:** `/maps` gallery and `/maps/[mapId]` viewer with pan/zoom, anchored pins, overlay panel, and pin links to MDX pages. Map/pin code lives alongside existing map viewer components and `lib/` helpers.
+- **Admin (near-term):** edit flows for map pins and cover image positioning should stay coherent with existing API routes and components under `components/map-viewer/` and `src/app/api/`.
+
+## Code style expectations
+
+- Match existing file layout: `src/app/` routes, shared UI in `components/`, shared logic in `lib/`, MDX under `content/`.
+- Prefer small, composable components; colocate feature-specific pieces (e.g. map viewer) rather than a flat catch-all folder unless already established.
+- New MDX-facing components should be ergonomic for authors (clear props, sensible defaults, minimal boilerplate in `.mdx` files).
+- Do not introduce a database, auth platform, or heavy CMS unless the user asks for that scope change.
+
+## Documentation rules (add this section)
+
+- Default doc location: write long-form docs in docs/ (create the folder if missing). Keep the root README.md as a short project overview + quickstart.
+- File header docs: for any new or significantly changed module in components/, lib/, or src/app/api/, add a short header comment (2–8 lines) describing:
+    - purpose, key inputs/outputs, and any gotchas (e.g., coordinate systems, transform-origin, server/client boundaries).
+- When to create/update docs:
+    - New feature or multi-file refactor → create/update docs/<feature>.md
+    - Changes to map/pins behavior → update docs/maps.md
+    - Changes to content/MDX parsing → update docs/content.md
+    - Changes to deployment/testing workflow → update docs/deployment.md
+- Keep docs practical: include a “How to test” checklist for any interactive feature.
+- Avoid walls of text inside code: if a header comment exceeds ~10 lines, move it into docs/ and leave a short pointer comment.
+
+## What not to do
+
+- Do not revert to the Pages Router or JavaScript-only new modules without a strong reason.
+- Do not replace Tailwind with CSS-in-JS or another styling system without explicit instruction.
+- Avoid spoilers or meta secrets in UI defaults; player-safe reading paths should remain the default until spoiler components are used.

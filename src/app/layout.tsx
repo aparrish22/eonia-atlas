@@ -1,17 +1,17 @@
-import "./globals.css"
-import type { Metadata } from "next"
-import { FadeLayout } from "@/components/FadeLayout"
-import Navbar from "@/components/Navbar"
+import "./globals.css";
+import type { Metadata } from "next";
+import { FadeLayout } from "@/components/FadeLayout";
+import Navbar from "@/components/Navbar";
 
 export const metadata: Metadata = {
   title: "Eonia Atlas",
   description: "A living world of maps, lore, and legends.",
-}
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
@@ -22,5 +22,5 @@ export default function RootLayout({
         </FadeLayout>
       </body>
     </html>
-  )
+  );
 }
