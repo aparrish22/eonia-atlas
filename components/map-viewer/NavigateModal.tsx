@@ -1,22 +1,29 @@
-"use client"
+"use client";
 
 type NavigateModalProps = {
-  open: boolean
-  title: string
-  loading: boolean
-  onCancel: () => void
-  onConfirm: () => void
-}
+  open: boolean;
+  title: string;
+  loading: boolean;
+  onCancel: () => void;
+  onConfirm: () => void;
+};
 
-export function NavigateModal({ open, title, loading, onCancel, onConfirm }: NavigateModalProps) {
-  if (!open) return null
+export function NavigateModal({
+  open,
+  title,
+  loading,
+  onCancel,
+  onConfirm,
+}: NavigateModalProps) {
+  if (!open) return null;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-6">
       <div className="w-full max-w-md rounded-3xl border border-white/10 bg-black/60 p-5 shadow-xl backdrop-blur">
         <h3 className="text-lg font-semibold">Open page?</h3>
         <p className="mt-2 text-sm text-white/70">
-          Do you want to go to <span className="font-medium text-white">{title}</span>?
+          Do you want to go to{" "}
+          <span className="font-medium text-white">{title}</span>?
         </p>
         <div className="mt-5 flex items-center justify-end gap-2">
           <button
@@ -41,6 +48,5 @@ export function NavigateModal({ open, title, loading, onCancel, onConfirm }: Nav
         </div>
       </div>
     </div>
-  )
+  );
 }
-
