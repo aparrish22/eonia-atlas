@@ -895,7 +895,7 @@ export function WorldMap({
           if (navTimeoutRef.current) window.clearTimeout(navTimeoutRef.current);
           navTimeoutRef.current = window.setTimeout(() => {
             router.push(navPrompt.href);
-          }, 500);
+          }, 250);
         }}
       />
     </main>

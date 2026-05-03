@@ -2,8 +2,9 @@
 
 ## High Priority
 
-- [ ] Implement base world map rendering with Leaflet/Mapbox
-  - Rationale: Core functionality required for the atlas application to display geographic data
+<!-- - [ ] Implement base world map rendering with Leaflet/Mapbox
+  - Rationale: Core functionality required for the atlas application to display geographic data -->
+
 - [ ] Add pin placement and clustering functionality
   - Rationale: Enables users to visualize multiple locations and prevents UI clutter at high zoom levels
 - [ ] Create marker popup information display
@@ -36,11 +37,11 @@
 ## New Ideas
 
 - [ ] Integrate text-driven game mechanics
-    - Rationale: Leverage existing Next.js + TypeScript stack with React state management for interactive storytelling
-    - Suggested approach: State machine pattern for scene/choice/inventory management, localStorage for session saves
-    - Consider: Single-player progression first; add auth + database (Supabase) only if cross-device persistence needed
-- [ ] Add location-based narrative content
-    - Rationale: Combine map pins with story triggers to create immersive geographic storytelling experiences
+  - Rationale: Leverage existing Next.js + TypeScript stack with React state management for interactive storytelling
+  - Suggested approach: State machine pattern for scene/choice/inventory management, localStorage for session saves
+  - Consider: Single-player progression first; add auth + database (Supabase) only if cross-device persistence needed
 - [ ] Implement interactive tutorials and guided tours
-    - Rationale: Help users learn map features through step-by-step interactive walkthroughs
+  - Rationale: Help users learn map features through step-by-step interactive walkthroughs
+- [ ] Add location-based narrative content
+  - Rationale: Combine map pins with story triggers to create immersive geographic storytelling experiences
 - [ ] Implement a "Guess the Spell" Game that goes through a list of custom spells and 2024e dnd spells. Each custom spell may refer to an original dnd spell for comparison. Can be a simple game with a simple in-browser window.
