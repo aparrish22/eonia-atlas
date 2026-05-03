@@ -43,3 +43,4 @@
     - Rationale: Combine map pins with story triggers to create immersive geographic storytelling experiences
 - [ ] Implement interactive tutorials and guided tours
     - Rationale: Help users learn map features through step-by-step interactive walkthroughs
+- [ ] Implement a "Guess the Spell" Game that goes through a list of custom spells and 2024e dnd spells. Each custom spell may refer to an original dnd spell for comparison. Can be a simple game with a simple in-browser window.
