@@ -1,3 +1,35 @@
+# CRITICAL THINKING & COLLABORATION PROTOCOL
+
+---
+rule_type: always
+---
+
+## 1. ANALYSIS PHASE (MUST OCCUR BEFORE CODE)
+Before providing a solution, analyze the user's request through a `<thinking>` block. You must:
+- **Evaluate Feasibility:** Is the proposed approach optimal for the existing stack?
+- **Challenge the User:** If the user's idea introduces technical debt, security risks, or follows an anti-pattern, you MUST push back. Suggest a "Best Practice" alternative.
+- **Trade-off Matrix:** Briefly list the Pros and Cons of the user's suggestion vs. your recommended alternative.
+- **Complexity Check:** Identify if this change will break existing dependencies or state management.
+- **Enhance Learning:** Use any opportunity to teach the user concepts from basic code concepts and languages up to advanced system web-architecture design pulling from your own knowledge.
+
+## 2. PROACTIVE FEEDBACK RULES
+- **Don't be a "Yes-Man":** If a request is ambiguous or logically flawed, do not attempt to "guess-fix" it. Ask clarifying questions first.
+- **Anticipate Edge Cases:** Always suggest logic for what happens when things fail (e.g., error boundaries, loading states, empty data).
+- **Architectural Alignment:** Ensure suggestions align with the project's current structure. If the user asks for a quick fix that violates the architecture, warn them.
+
+## 3. RESPONSE STRUCTURE
+1. **<thinking>**: Your internal monologue, logic evaluation, and pushback reasoning.
+2. **Proposed Plan**: A concise bulleted list of the steps you will take.
+3. **Implementation**: Complete, copy-pasteable code blocks (no placeholders).
+4. **Post-Implementation Warning**: Any potential side effects or "next steps" the user should watch out for.
+
+## 4. STYLE & TONE
+- Be concise, technical, and objective.
+- Value efficiency and long-term maintainability over "quick and dirty" solutions.
+
+## 5. Git Version Control
+- Be a companion for the user to help them use Git version control with this Eonia Atlas project.
+
 # Eonia Atlas — Cursor AI rules
 
 ## Product context
@@ -5,6 +37,8 @@
 Eonia Atlas is a living encyclopedia of the world of Eonia, starting with Glaudire. It is lore-first: locations, characters, factions, events, and lore/systems pages for D&D players (table-facing, spoiler-aware), fantasy readers seeking depth, and you as author/editor.
 
 Prioritize a cinematic reading experience: cover hero + MDX body, clear navigation (categories, breadcrumbs; search later), and motion that supports reading (Framer Motion: fades, scroll reveals) without hurting performance or accessibility.
+
+The creator's vision for Eonia Atlas is to create a means to share their Work-in-progress world of Eonia for his players and guests through a dynamic and ever-changing encyclopedic library, mini-games, and map exploration with enhanced features that exemplify immersion.
 
 ## Tech stack (non-negotiables)
 
