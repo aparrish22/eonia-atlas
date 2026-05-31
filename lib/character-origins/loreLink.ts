@@ -1,8 +1,8 @@
 /**
  * Character Origins — lore URL helpers aligned with App Router `/lore/[category]/[slug]`.
+ * Client-safe: no static import of lib/content (fs). Use loreEntryExists only on server.
  */
 
-import { getEntry } from "@/lib/content"
 import type { LoreCategory, LoreStatus, RegionDefinition } from "./types"
 
 export function loreHref(category: LoreCategory, slug: string): string {
@@ -15,8 +15,9 @@ export function resolveLoreHref(region: RegionDefinition): string | null {
 }
 
 /** Server/build-time check: slug set but MDX file missing. Do not call from Client Components. */
-export function loreEntryExists(region: RegionDefinition): boolean {
+export async function loreEntryExists(region: RegionDefinition): Promise<boolean> {
   if (!region.loreSlug) return false
+  const { getEntry } = await import("@/lib/content")
   return getEntry(region.loreCategory, region.loreSlug) !== null
 }
 

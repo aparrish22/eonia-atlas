@@ -4,13 +4,21 @@
 
 Interactive mini-game: players answer **10 questions** (3 choices each) and receive a **primary region** plus **2 alternates**, grounded in the author region registry and tag scoring—not LLM-invented lore.
 
-## Routes (planned)
+## Routes
 
 | Route | Status |
 | --- | --- |
-| `/character-origins` | Sprint 2+ (UI) |
+| `/character-origins` | **Live** (Sprint 2 shell: intro + start; Sprint 3 quiz UI) |
 
-Navbar link: planned in Sprint 2.
+Navbar: **Character Origins** link in `components/Navbar.tsx`.
+
+### UI modules (Sprint 2)
+
+| Component | Path |
+| --- | --- |
+| Page shell | `src/app/character-origins/page.tsx` |
+| Intro + phase state | `components/character-origins/CharacterOriginsShell.tsx` |
+| Quiz slot (placeholder) | `components/character-origins/CharacterOriginsQuizPlaceholder.tsx` |
 
 ## Data layer (Sprint 1 — implemented)
 
@@ -20,7 +28,9 @@ Navbar link: planned in Sprint 2.
 | Region registry (13 regions, 12 scorable) | `lib/character-origins/regions.ts` |
 | Questions (`origins-v1-10x3`) | `lib/character-origins/questions.ts` |
 | Resolver | `lib/character-origins/resolver.ts` |
-| Public API | `lib/character-origins/index.ts` |
+| Public API | `lib/character-origins/index.ts` (server-oriented) |
+
+**Client Components:** import from leaf modules (`constants`, `questions`, `resolver`) — not the barrel — so `lib/content` / `fs` is not bundled.
 
 ### Scorable regions
 
@@ -74,10 +84,18 @@ Region entries live under `content/locations/*`. Registry `loreSlug` + `loreStat
 3. Confirm `outcome.primary.regionId` is never `tarkir`.
 4. Confirm Kircia-heavy choices (q02-c, q04-a, q08-c) rank `kircia` highly.
 
+## How to test (Sprint 2)
+
+1. `npm run dev` → open `http://localhost:3000/character-origins`
+2. Navbar shows **Character Origins**; link reaches the page.
+3. Intro shows “Find a region that fits your character idea.”
+4. **Yes, begin** → questionnaire placeholder with `0 / 10` and **Back to intro**.
+5. **Not now** → home page.
+6. Resize to mobile: buttons wrap; no horizontal overflow.
+
 ## Future
 
-- Sprint 2: route + navbar shell
-- Sprint 3: client quiz UI
+- Sprint 3: client quiz UI (replace placeholder)
 - Sprint 4: results panel, WIP badges, optional `localStorage`
 - Accounts: persist `SerializedOriginsResult` JSON
 - Spoiler filter on Lucelus campaign content in quiz copy
